@@ -4,7 +4,7 @@
 #
 Name     : passlib
 Version  : 1.6.5
-Release  : 12
+Release  : 13
 URL      : https://pypi.python.org/packages/source/p/passlib/passlib-1.6.5.tar.gz
 Source0  : https://pypi.python.org/packages/source/p/passlib/passlib-1.6.5.tar.gz
 Summary  : comprehensive password hashing framework supporting over 30 schemes
