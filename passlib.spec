@@ -5,15 +5,17 @@
 # Source0 file verified with key 0x4D8592DF4CE1ED31 (elic@astllc.org)
 #
 Name     : passlib
-Version  : 1.6.5
-Release  : 21
-URL      : https://pypi.python.org/packages/source/p/passlib/passlib-1.6.5.tar.gz
-Source0  : https://pypi.python.org/packages/source/p/passlib/passlib-1.6.5.tar.gz
-Source99 : https://pypi.python.org/packages/source/p/passlib/passlib-1.6.5.tar.gz.asc
+Version  : 1.7.1
+Release  : 22
+URL      : http://pypi.debian.net/passlib/passlib-1.7.1.tar.gz
+Source0  : http://pypi.debian.net/passlib/passlib-1.7.1.tar.gz
+Source99 : http://pypi.debian.net/passlib/passlib-1.7.1.tar.gz.asc
 Summary  : comprehensive password hashing framework supporting over 30 schemes
 Group    : Development/Tools
 License  : BSD-3-Clause
 Requires: passlib-python
+Requires: bcrypt
+Requires: cryptography
 BuildRequires : nose-python
 BuildRequires : pbr
 BuildRequires : pip
@@ -35,11 +37,11 @@ python components for the passlib package.
 
 
 %prep
-%setup -q -n passlib-1.6.5
+%setup -q -n passlib-1.7.1
 
 %build
 export LANG=C
-export SOURCE_DATE_EPOCH=1484561036
+export SOURCE_DATE_EPOCH=1492438285
 python2 setup.py build -b py2
 python3 setup.py build -b py3
 
@@ -49,14 +51,18 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 py.test-2.7 || :
 %install
-export SOURCE_DATE_EPOCH=1484561036
+export SOURCE_DATE_EPOCH=1492438285
 rm -rf %{buildroot}
 python2 -tt setup.py build -b py2 install --root=%{buildroot} --force
 python3 -tt setup.py build -b py3 install --root=%{buildroot} --force
+echo ----[ mark ]----
+cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
+echo ----[ mark ]----
 
 %files
 %defattr(-,root,root,-)
 
 %files python
 %defattr(-,root,root,-)
-/usr/lib/python*/*
+/usr/lib/python2*/*
+/usr/lib/python3*/*

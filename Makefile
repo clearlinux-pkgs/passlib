@@ -1,5 +1,5 @@
 PKG_NAME := passlib
-URL := https://pypi.python.org/packages/source/p/passlib/passlib-1.6.5.tar.gz
+URL := http://pypi.debian.net/passlib/passlib-1.7.1.tar.gz
 
 
 include ../common/Makefile.common
