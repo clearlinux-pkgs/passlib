@@ -6,7 +6,7 @@
 #
 Name     : passlib
 Version  : 1.7.1
-Release  : 30
+Release  : 31
 URL      : http://pypi.debian.net/passlib/passlib-1.7.1.tar.gz
 Source0  : http://pypi.debian.net/passlib/passlib-1.7.1.tar.gz
 Source99 : http://pypi.debian.net/passlib/passlib-1.7.1.tar.gz.asc
