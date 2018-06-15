@@ -21,7 +21,7 @@ BuildRequires : nose-python
 BuildRequires : pbr
 BuildRequires : pip
 BuildRequires : pytest
-BuildRequires : python-dev
+
 BuildRequires : python3-dev
 BuildRequires : setuptools
 
