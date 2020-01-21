@@ -5,25 +5,26 @@
 # Source0 file verified with key 0x4D8592DF4CE1ED31 (elic@astllc.org)
 #
 Name     : passlib
-Version  : 1.7.1
-Release  : 42
-URL      : http://pypi.debian.net/passlib/passlib-1.7.1.tar.gz
-Source0  : http://pypi.debian.net/passlib/passlib-1.7.1.tar.gz
-Source99 : http://pypi.debian.net/passlib/passlib-1.7.1.tar.gz.asc
+Version  : 1.7.2
+Release  : 43
+URL      : https://files.pythonhosted.org/packages/6d/6b/4bfca0c13506535289b58f9c9761d20f56ed89439bfe6b8e07416ce58ee1/passlib-1.7.2.tar.gz
+Source0  : https://files.pythonhosted.org/packages/6d/6b/4bfca0c13506535289b58f9c9761d20f56ed89439bfe6b8e07416ce58ee1/passlib-1.7.2.tar.gz
+Source1  : https://files.pythonhosted.org/packages/6d/6b/4bfca0c13506535289b58f9c9761d20f56ed89439bfe6b8e07416ce58ee1/passlib-1.7.2.tar.gz.asc
 Summary  : comprehensive password hashing framework supporting over 30 schemes
 Group    : Development/Tools
 License  : BSD-3-Clause
-Requires: passlib-python3
-Requires: passlib-python
+Requires: passlib-python = %{version}-%{release}
+Requires: passlib-python3 = %{version}-%{release}
+Requires: Sphinx
+Requires: argon2_cffi
 Requires: bcrypt
 Requires: cryptography
+BuildRequires : Sphinx
+BuildRequires : bcrypt
+BuildRequires : buildreq-distutils3
+BuildRequires : cryptography
 BuildRequires : nose-python
-BuildRequires : pbr
-BuildRequires : pip
 BuildRequires : pytest
-
-BuildRequires : python3-dev
-BuildRequires : setuptools
 
 %description
 cross-platform implementations of over 30 password hashing algorithms, as well
@@ -34,7 +35,7 @@ cross-platform implementations of over 30 password hashing algorithms, as well
 %package python
 Summary: python components for the passlib package.
 Group: Default
-Requires: passlib-python3
+Requires: passlib-python3 = %{version}-%{release}
 
 %description python
 python components for the passlib package.
@@ -50,15 +51,22 @@ python3 components for the passlib package.
 
 
 %prep
-%setup -q -n passlib-1.7.1
+%setup -q -n passlib-1.7.2
+cd %{_builddir}/passlib-1.7.2
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1523565714
-python3 setup.py build -b py3
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1579640969
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
+export MAKEFLAGS=%{?_smp_mflags}
+python3 setup.py build
 
 %check
 export http_proxy=http://127.0.0.1:9/
@@ -66,8 +74,9 @@ export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 py.test || :
 %install
+export MAKEFLAGS=%{?_smp_mflags}
 rm -rf %{buildroot}
-python3 -tt setup.py build -b py3 install --root=%{buildroot}
+python3 -tt setup.py build  install --root=%{buildroot}
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
