@@ -6,7 +6,7 @@
 #
 Name     : passlib
 Version  : 1.7.2
-Release  : 43
+Release  : 44
 URL      : https://files.pythonhosted.org/packages/6d/6b/4bfca0c13506535289b58f9c9761d20f56ed89439bfe6b8e07416ce58ee1/passlib-1.7.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/6d/6b/4bfca0c13506535289b58f9c9761d20f56ed89439bfe6b8e07416ce58ee1/passlib-1.7.2.tar.gz
 Source1  : https://files.pythonhosted.org/packages/6d/6b/4bfca0c13506535289b58f9c9761d20f56ed89439bfe6b8e07416ce58ee1/passlib-1.7.2.tar.gz.asc
@@ -27,10 +27,9 @@ BuildRequires : nose-python
 BuildRequires : pytest
 
 %description
-cross-platform implementations of over 30 password hashing algorithms, as well
-        as a framework for managing existing password hashes. It's designed to be useful
-        for a wide range of tasks, from verifying a hash found in /etc/shadow, to
-        providing full-strength password hashing for multi-user applications.
+==========================
+The Passlib Python Library
+==========================
 
 %package python
 Summary: python components for the passlib package.
@@ -45,6 +44,7 @@ python components for the passlib package.
 Summary: python3 components for the passlib package.
 Group: Default
 Requires: python3-core
+Provides: pypi(passlib)
 
 %description python3
 python3 components for the passlib package.
@@ -59,7 +59,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1579640969
+export SOURCE_DATE_EPOCH=1583200842
+# -Werror is for werrorists
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$CFLAGS -fno-lto "
