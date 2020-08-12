@@ -6,7 +6,7 @@
 #
 Name     : passlib
 Version  : 1.7.2
-Release  : 45
+Release  : 47
 URL      : https://files.pythonhosted.org/packages/6d/6b/4bfca0c13506535289b58f9c9761d20f56ed89439bfe6b8e07416ce58ee1/passlib-1.7.2.tar.gz
 Source0  : https://files.pythonhosted.org/packages/6d/6b/4bfca0c13506535289b58f9c9761d20f56ed89439bfe6b8e07416ce58ee1/passlib-1.7.2.tar.gz
 Source1  : https://files.pythonhosted.org/packages/6d/6b/4bfca0c13506535289b58f9c9761d20f56ed89439bfe6b8e07416ce58ee1/passlib-1.7.2.tar.gz.asc
@@ -16,10 +16,11 @@ License  : BSD-3-Clause
 Requires: passlib-python = %{version}-%{release}
 Requires: passlib-python3 = %{version}-%{release}
 Requires: Sphinx
-Requires: argon2_cffi
+Requires: argon2-cffi
 Requires: bcrypt
 Requires: cryptography
 BuildRequires : Sphinx
+BuildRequires : argon2-cffi
 BuildRequires : bcrypt
 BuildRequires : buildreq-distutils3
 BuildRequires : cryptography
@@ -27,9 +28,10 @@ BuildRequires : nose-python
 BuildRequires : pytest
 
 %description
-==========================
-The Passlib Python Library
-==========================
+cross-platform implementations of over 30 password hashing algorithms, as well
+        as a framework for managing existing password hashes. It's designed to be useful
+        for a wide range of tasks, from verifying a hash found in /etc/shadow, to
+        providing full-strength password hashing for multi-user applications.
 
 %package python
 Summary: python components for the passlib package.
@@ -59,12 +61,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1583200842
-# -Werror is for werrorists
+export SOURCE_DATE_EPOCH=1597273126
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
-export FCFLAGS="$CFLAGS -fno-lto "
-export FFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$FFLAGS -fno-lto "
+export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 setup.py build
